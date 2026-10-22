@@ -23,11 +23,9 @@ def create_address(
 
 @router.get("", response_model=list[AddressResponse])
 def list_addresses(
-    skip: int = Query(default=0, ge=0),
-    limit: int = Query(default=100, ge=1, le=500),
     db: Session = Depends(get_db),
 ) -> list[AddressModel]:
-    return address_service.AddressList(db, skip, limit)
+    return address_service.AddressList(db)
 
 
 # Keep this static path above /{address_id}, which also matches one URL segment.

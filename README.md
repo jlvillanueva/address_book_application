@@ -55,7 +55,7 @@ pytest
 | Method | Path | Description |
 | --- | --- | --- |
 | `POST` | `/addresses` | Create an address |
-| `GET` | `/addresses` | List addresses (`skip` and `limit` are supported) |
+| `GET` | `/addresses` | List all addresses |
 | `GET` | `/addresses/{address_id}` | Retrieve one address |
 | `PUT` | `/addresses/{address_id}` | Replace an address |
 | `DELETE` | `/addresses/{address_id}` | Delete an address |

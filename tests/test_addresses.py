@@ -72,17 +72,18 @@ def test_create_get_update_and_delete_address(client):
     assert client.get(f"/addresses/{address_id}").status_code == 404
 
 
-def test_list_addresses(client):
+def test_list_addresses_returns_all_addresses(client):
     client.post("/addresses", json=address_payload())
     client.post(
         "/addresses",
         json=address_payload(name="Office", city="Oakland"),
     )
 
-    response = client.get("/addresses?skip=1&limit=1")
+    response = client.get("/addresses")
     assert response.status_code == 200
-    assert len(response.json()) == 1
-    assert response.json()[0]["name"] == "Office"
+    results = response.json()
+    assert len(results) == 2
+    assert [address["name"] for address in results] == ["Home", "Office"]
 
 
 def test_nearby_search_returns_only_addresses_within_radius(client):

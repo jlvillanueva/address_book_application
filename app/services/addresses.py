@@ -20,12 +20,10 @@ def AddressAdd(db: Session, address_data: AddressInput) -> AddressModel:
     return address
 
 
-def AddressList(db: Session, skip: int = 0, limit: int = 100) -> list[AddressModel]:
+def AddressList(db: Session) -> list[AddressModel]:
     statement = (
         select(AddressModel)
         .order_by(AddressModel.address_id)
-        .offset(skip)
-        .limit(limit)
     )
     return list(db.scalars(statement).all())
 
